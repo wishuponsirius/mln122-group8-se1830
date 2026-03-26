@@ -1769,6 +1769,7 @@
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDirect(); });
 
     // GAME
+    const GAME_DURATION = 30; // thay 90 thành 30 để countdown ngắn hơn
     const keywordsBase = [
       { word: "TOÀN CẦU HÓA", slide: "Mục 6.2.1 – Tính tất yếu khách quan", content: "Hội nhập kinh tế quốc tế trở thành một tất yếu khách quan do xu thế 'toàn cầu hóa' kinh tế mang lại. Nếu không hội nhập, các nước không thể tự đảm bảo được các điều kiện cần thiết cho sản xuất trong nước." },
       { word: "BÃI THẢI", slide: "Mục 6.2.2 – Tác động tiêu cực", content: "Rủi ro lớn khi tham gia chuỗi giá trị toàn cầu là nếu không cẩn thận, nước ta dễ trở thành 'bãi thải công nghiệp và công nghệ thấp', làm cạn kiệt tài nguyên và hủy hoại môi trường." },
@@ -1826,7 +1827,7 @@
       // Pre-load answer data (not visible yet — screen is hidden)
       document.getElementById('answer-slide').textContent = keywords[currentIdx].slide;
       document.getElementById('answer-content').textContent = keywords[currentIdx].content;
-      timeLeft = 90;
+      timeLeft = GAME_DURATION;
       startTimer();
     }
 
@@ -1836,11 +1837,11 @@
       const txt = document.getElementById('timer-text');
       bar.style.strokeDashoffset = 0;
       bar.style.stroke = '#f5c842';
-      txt.textContent = 90;
+      txt.textContent = GAME_DURATION;
       timer = setInterval(() => {
         timeLeft--;
         txt.textContent = timeLeft;
-        const pct = timeLeft / 90;
+        const pct = timeLeft / GAME_DURATION;
         bar.style.strokeDashoffset = 238.8 - pct * 238.8;
         bar.style.stroke = pct > 0.4 ? '#f5c842' : pct > 0.2 ? '#f97316' : '#ef4444';
         if (timeLeft <= 0) { clearInterval(timer); showAnswer(); }
